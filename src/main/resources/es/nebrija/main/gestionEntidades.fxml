@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+
+      alignment="CENTER" spacing="15" style="-fx-background-color: #f4f4f9;" prefWidth="400">
+
+    <!-- Título de la pantalla -->
+    <Label text="Gestión de Entidades" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+    <!-- Selección de entidad -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Seleccionar entidad:" style="-fx-font-size: 14px; -fx-text-fill: #333333;" />
+        <ComboBox fx:id="entitySelector" prefWidth="200"/>
+    </HBox>
+
+    <!-- Campos de entrada de datos -->
+    <TextField fx:id="modeloField" promptText="Modelo" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="precioField" promptText="Precio" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="marcaField" promptText="Marca" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="fechaLanzamientoField" promptText="Fecha de lanzamiento (YYYY-MM-DD)" style="-fx-font-size: 14px;"/>
+
+    <!-- Botones de acción -->
+    <HBox alignment="CENTER" spacing="15">
+        <Button fx:id="saveButton" text="Guardar"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;" />
+        <Button fx:id="backButton" text="Volver"
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px;" />
+    </HBox>
+
+    <!-- Margen interno para un diseño más limpio -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</VBox>

@@ -86,11 +86,44 @@ public class DaoDispositivoImpl implements Dao<Dispositivo> {
 
     @Override
     public Dispositivo borrar(Dispositivo dispositivo) {
-        return null;
+        Dispositivo dispositivoEliminado = null;
+        try (Session sesion = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = sesion.beginTransaction();
+
+            // Verificar si el dispositivo existe en la base de datos
+            Dispositivo dispositivoEnBD = sesion.get(Dispositivo.class, dispositivo.getIdDispositivo());
+
+            if (dispositivoEnBD != null) {
+                // Eliminar el dispositivo
+                sesion.remove(dispositivoEnBD);
+                transaction.commit();
+                dispositivoEliminado = dispositivoEnBD;
+            } else {
+                System.out.println("El dispositivo no existe en la base de datos.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al eliminar el dispositivo.");
+        }
+        return dispositivoEliminado;
     }
 
     @Override
     public Dispositivo modificar(Dispositivo dispositivo) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            try {
+                session.merge(dispositivo);  // Usamos merge para actualizar la entidad en la base de datos
+                transaction.commit();        // Confirmamos la transacción
+                return dispositivo;
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();  // Si hay un error, revertimos la transacción
+                }
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 

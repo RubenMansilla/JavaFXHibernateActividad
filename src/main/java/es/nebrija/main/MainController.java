@@ -8,8 +8,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
@@ -108,7 +112,7 @@ public class MainController {
 
             if (marca == null) {
                 marca = new Marca(phoneBrand.getText());
-                daoMarcaImpl.grabar(marca);
+                daoMarcaImpl.grabar(marca);  // Crear la nueva marca si no existe
             }
 
             // Editar los valores del dispositivo seleccionado
@@ -120,19 +124,62 @@ public class MainController {
             // Modificar el dispositivo en la base de datos
             daoDispositivoImpl.modificar(dispositivoSeleccionado);
 
-            // Refrescar la tabla para reflejar los cambios
-            tableView.refresh();
+            // Buscar el dispositivo en la lista de la tabla por ID y reemplazarlo
+            ObservableList<Dispositivo> dispositivos = tableView.getItems();
+            for (int i = 0; i < dispositivos.size(); i++) {
+                if (dispositivos.get(i).getIdDispositivo() == dispositivoSeleccionado.getIdDispositivo()) {
+                    dispositivos.set(i, dispositivoSeleccionado);  // Reemplazar el item modificado en la lista
+                    break;
+                }
+            }
+
+            actualizarTabla();
 
             System.out.println("Dispositivo editado: " + dispositivoSeleccionado.getModelo());
         }
     }
 
+
+
     @FXML
     void eliminarDispositivo() {
         if (dispositivoSeleccionado != null) {
+            // Eliminar el dispositivo de la base de datos
             daoDispositivoImpl.borrar(dispositivoSeleccionado);
-            tableView.getItems().remove(dispositivoSeleccionado);
+
+            // Actualizar la lista de dispositivos en la tabla
+            actualizarTabla();
+
             System.out.println("Dispositivo eliminado: " + dispositivoSeleccionado.getModelo());
         }
     }
+
+    private void actualizarTabla() {
+        // Leer la lista actualizada de dispositivos desde la base de datos
+        ArrayList<Dispositivo> listadoDispositivos = (ArrayList<Dispositivo>) daoDispositivoImpl.leerLista();
+        ObservableList<Dispositivo> dispositivos = FXCollections.observableArrayList(listadoDispositivos);
+
+        // Configurar la tabla con la lista actualizada
+        tableView.setItems(dispositivos);
+        tableView.refresh();  // Refrescar para asegurar que la tabla se actualiza
+    }
+
+    private void cambiarPantallaGestionEntidad() {
+        try {
+            // Cargar el archivo FXML de la pantalla principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/nebrija/main/gestionEntidades.fxml"));
+            VBox root = loader.load();  // Carga el archivo FXML y lo convierte a VBox
+
+            // Crear la nueva escena con el root de la pantalla principal
+            Scene scene = new Scene(root);
+
+            // Obtener la ventana actual (Stage) y cambiar la escena
+            Stage stage = (Stage) phoneModelField.getScene().getWindow();
+            stage.setScene(scene);  // Establecer la nueva escena
+            stage.show();  // Mostrar la nueva pantalla
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

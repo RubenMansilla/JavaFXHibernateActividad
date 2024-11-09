@@ -89,8 +89,22 @@ public class DaoMarcaImpl implements Dao<Marca> {
 
     @Override
     public Marca modificar(Marca marca) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            try {
+                session.merge(marca);  // Usamos merge para actualizar la entidad en la base de datos
+                transaction.commit();  // Confirmamos la transacción
+                return marca;
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();  // Si hay un error, revertimos la transacción
+                }
+                e.printStackTrace();
+            }
+        }
         return null;
     }
+
 
     @Override
     public void grabarLista(List<Marca> l) {
