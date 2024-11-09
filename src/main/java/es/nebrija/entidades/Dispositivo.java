@@ -27,6 +27,14 @@ public class Dispositivo {
     // Constructores
     public Dispositivo() {}
 
+    public Dispositivo(String modelo, double precio, Marca marca, String fchLanzamiento) {
+        this.modelo = modelo;
+        this.precio = precio;
+        this.marca = marca;
+        this.fchLanzamiento = fchLanzamiento;
+    }
+
+
     public int getIdDispositivo() {
         return idDispositivo;
     }

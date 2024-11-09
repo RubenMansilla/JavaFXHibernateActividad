@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,46 +8,49 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="es.nebrija.main.MainController">
-    <children>
-        <!-- Contenedor VBox para colocar las dos HBox una debajo de la otra -->
-        <VBox alignment="CENTER" spacing="10">
-            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="600.0" spacing="100.0">
-                <children>
-                    <TextField fx:id="phoneModelField" promptText="Modelo del teléfono"/>
-                    <TextField fx:id="priceField" promptText="Precio"/>
-                </children>
-            </HBox>
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="es.nebrija.main.MainController"
+      prefHeight="500.0" prefWidth="700.0" spacing="15" alignment="CENTER" style="-fx-background-color: #f4f4f9;">
 
-            <!-- HBox para el precio -->
-            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="600.0" spacing="100.0">
-                <children>
-                    <TextField fx:id="phoneBrand" promptText="Marca"/>
-                    <DatePicker fx:id="launchDateField" promptText="Fecha de lanzamiento"/>
-                </children>
-            </HBox>
+    <!-- Título de la pantalla -->
+    <Text text="Gestión de Dispositivos" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-fill: #333333;" />
 
-            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0" spacing="50.0">
-                <children>
-                    <Button fx:id="addButton" onAction="#añadirDispositivo" text="Añadir"/>
-                    <Button fx:id="editButton" onAction="#editarDispositivo" text="Actualizar"/>
-                    <Button fx:id="deleteButton" onAction="#eliminarDispositivo" text="Eliminar"/>
-                </children>
-            </HBox>
-        </VBox>
-
-        <!-- Contenedor HBox para la tabla -->
-        <HBox prefHeight="269.0" prefWidth="600.0">
-            <children>
-                <TableView fx:id="tableView" prefHeight="313.0" prefWidth="600.0">
-                    <columns>
-                        <TableColumn fx:id="columnModel" prefWidth="306.4" text="Modelo"/>
-                        <TableColumn fx:id="columnBrand" prefWidth="283.2" text="Marca"/>
-                    </columns>
-                </TableView>
-            </children>
+    <!-- Campos de entrada de datos -->
+    <VBox alignment="CENTER" spacing="10">
+        <HBox alignment="CENTER" spacing="20">
+            <TextField fx:id="phoneModelField" promptText="Modelo del teléfono" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="priceField" promptText="Precio" style="-fx-font-size: 14px;"/>
         </HBox>
-    </children>
+        <HBox alignment="CENTER" spacing="20">
+            <TextField fx:id="phoneBrand" promptText="Marca" style="-fx-font-size: 14px;"/>
+            <DatePicker fx:id="launchDateField" promptText="Fecha de lanzamiento" style="-fx-font-size: 14px;"/>
+        </HBox>
+    </VBox>
+
+    <!-- Botones de acción -->
+    <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="addButton" onAction="#añadirDispositivo" text="Añadir"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;"/>
+        <Button fx:id="editButton" onAction="#editarDispositivo" text="Actualizar"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px;"/>
+        <Button fx:id="deleteButton" onAction="#eliminarDispositivo" text="Eliminar"
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px;"/>
+        <Button fx:id="manageEntityButton" onAction="#cambiarPantallaGestionEntidad" text="Gestionar Entidades"
+                style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 14px;"/>
+    </HBox>
+
+    <!-- Tabla de dispositivos -->
+    <TableView fx:id="tableView" prefHeight="300.0" prefWidth="650.0" style="-fx-font-size: 14px;">
+        <columns>
+            <TableColumn fx:id="columnModel" prefWidth="300.0" text="Modelo"/>
+            <TableColumn fx:id="columnBrand" prefWidth="300.0" text="Marca"/>
+        </columns>
+    </TableView>
+
+    <!-- Margen interno para un diseño más limpio -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 </VBox>

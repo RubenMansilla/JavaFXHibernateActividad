@@ -139,8 +139,6 @@ public class MainController {
         }
     }
 
-
-
     @FXML
     void eliminarDispositivo() {
         if (dispositivoSeleccionado != null) {
@@ -164,7 +162,8 @@ public class MainController {
         tableView.refresh();  // Refrescar para asegurar que la tabla se actualiza
     }
 
-    private void cambiarPantallaGestionEntidad() {
+    @FXML
+    void cambiarPantallaGestionEntidad() {
         try {
             // Cargar el archivo FXML de la pantalla principal
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/nebrija/main/gestionEntidades.fxml"));

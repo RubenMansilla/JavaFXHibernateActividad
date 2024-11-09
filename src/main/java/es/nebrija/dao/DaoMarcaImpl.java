@@ -113,6 +113,24 @@ public class DaoMarcaImpl implements Dao<Marca> {
 
     @Override
     public List<Marca> leerLista() {
-        return List.of();
+        List<Marca> marcas = null;
+        sesion = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = sesion.beginTransaction();
+
+            // Consulta para obtener todas las marcas
+            marcas = sesion.createQuery("FROM Marca", Marca.class).getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (sesion.getTransaction() != null) {
+                sesion.getTransaction().rollback();
+            }
+        } finally {
+            sesion.close();
+        }
+        return marcas != null ? marcas : List.of();  // Asegura que no se devuelva null
     }
+
 }
