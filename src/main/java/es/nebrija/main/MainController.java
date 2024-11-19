@@ -163,10 +163,10 @@ public class MainController {
     }
 
     @FXML
-    void cambiarPantallaGestionEntidad() {
+    void cambiarPantallaExportarImportar() {
         try {
             // Cargar el archivo FXML de la pantalla principal
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/nebrija/main/gestionEntidades.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/nebrija/main/exportarImportar.fxml"));
             VBox root = loader.load();  // Carga el archivo FXML y lo convierte a VBox
 
             // Crear la nueva escena con el root de la pantalla principal

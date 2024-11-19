@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nebrija.main.ImportExportController" alignment="CENTER" spacing="15" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <!-- Título con más separación -->
+        <Label text="Importar/Exportar Datos" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+        <!-- Espaciado adicional después del título -->
+        <Label text="" style="-fx-min-height: 20px;" />
+
+        <!-- Contenedor para los botones -->
+        <HBox alignment="CENTER" spacing="25">
+            <children>
+                <!-- Botón de Importar -->
+                <Button fx:id="importButton" text="Importar Datos" onAction="#importarDatos" prefWidth="180.0"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px;" />
+
+                <!-- Botón de Exportar -->
+                <Button fx:id="exportButton" text="Exportar Datos" onAction="#exportarDatos" prefWidth="180.0"
+                        style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px;" />
+            </children>
+        </HBox>
+
+        <!-- Botón para volver con separación reducida -->
+        <Button text="Volver" onAction= "#cambiarPantallaMain"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px;" />
+
+        <!-- Espaciado adicional entre "Volver" y el estado -->
+        <Label text="" style="-fx-min-height: 15px;" />
+
+        <!-- Etiqueta de estado con bordes y fondo atractivo -->
+        <Label fx:id="statusLabel" text="Estado: Listo para importar/exportar." wrapText="true"
+               style="-fx-font-size: 14px; -fx-text-fill: gray; -fx-font-weight: normal;"
+               VBox.vgrow="ALWAYS">
+        </Label>
+    </children>
+</VBox>

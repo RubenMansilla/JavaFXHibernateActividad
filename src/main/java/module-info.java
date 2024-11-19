@@ -5,7 +5,7 @@ module es.nebrija.actividadTelefonos {
     requires java.sql;
     requires jakarta.persistence;
     requires java.naming;
-    requires java.desktop;
+    requires javafx.graphics;
 
     exports es.nebrija.main;
     exports es.nebrija.dao;

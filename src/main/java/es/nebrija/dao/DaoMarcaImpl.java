@@ -84,7 +84,27 @@ public class DaoMarcaImpl implements Dao<Marca> {
 
     @Override
     public Marca borrar(Marca marca) {
-        return null;
+        Marca marcaEliminado = null;
+        try (Session sesion = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = sesion.beginTransaction();
+
+            // Verificar si el dispositivo existe en la base de datos
+            Marca marcaEnBD = sesion.get(Marca.class, marca.getIdMarca());
+
+            if (marcaEnBD != null) {
+                // Eliminar el dispositivo
+                sesion.remove(marcaEnBD);
+                transaction.commit();
+                marcaEliminado = marcaEnBD;
+            } else {
+                System.out.println("La amrca no existe en la base de datos.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al eliminar la marca.");
+        }
+        return marcaEliminado;
     }
 
     @Override

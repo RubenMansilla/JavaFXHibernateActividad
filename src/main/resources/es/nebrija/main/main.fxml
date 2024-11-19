@@ -37,7 +37,7 @@
                 style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px;"/>
         <Button fx:id="deleteButton" onAction="#eliminarDispositivo" text="Eliminar"
                 style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14px;"/>
-        <Button fx:id="manageEntityButton" onAction="#cambiarPantallaGestionEntidad" text="Gestionar Entidades"
+        <Button fx:id="manageEntityButton" onAction="#cambiarPantallaExportarImportar" text="Exportar/Importar CSV"
                 style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 14px;"/>
     </HBox>
 
