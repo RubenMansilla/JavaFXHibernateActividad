@@ -22,6 +22,7 @@ public class DaoUsuarioImpl implements Dao<Usuario> {
 
         try {
             transaction = sesion.beginTransaction();
+            // Guardar el objeto en la base de datos
             sesion.save(u);
             transaction.commit();
         } catch (HibernateException e) {
@@ -59,8 +60,9 @@ public class DaoUsuarioImpl implements Dao<Usuario> {
         Usuario usuario = null;
         sesion = HibernateUtil.getSessionFactory().openSession();
         try {
+            // Iniciar una transacción
             transaction = sesion.beginTransaction();
-            // Iniciar una transacción (opcional, pero recomendado)
+
             List<Usuario> usuarios = sesion
                     .createQuery("FROM Usuario WHERE nombreUsuario = :nombreUsuario", Usuario.class).setParameter(campo, valor)
                     .getResultList();

@@ -41,6 +41,10 @@
                 style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 14px;"/>
     </HBox>
 
+    <!-- Mensaje de error o confirmación -->
+    <Text fx:id="messageText" text="" wrappingWidth="600"
+          style="-fx-font-size: 14px; -fx-fill: red;" />
+
     <!-- Tabla de dispositivos -->
     <TableView fx:id="tableView" prefHeight="300.0" prefWidth="650.0" style="-fx-font-size: 14px;">
         <columns>

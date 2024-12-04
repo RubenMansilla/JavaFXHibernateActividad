@@ -20,7 +20,7 @@ public class Dispositivo {
     @Column(name = "fchLanzamiento", nullable = false)
     private String fchLanzamiento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "marca_id")
     private Marca marca;  // Relación con la entidad Marca
 
